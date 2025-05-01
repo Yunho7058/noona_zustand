@@ -1,6 +1,6 @@
 import React from "react";
 import usePhoneStore from "../store/phoneStore";
-import { Avatar, Stack, Typography } from "@mui/material";
+import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
 
 export const ContacList = () => {
   const { phoneList } = usePhoneStore();
@@ -27,29 +27,37 @@ export const ContacList = () => {
     //   ))}
     // </div>
     <>
-      <Stack spacing={2}>
-        {phoneList?.map((el) => {
-          //   const randomColor =
-          //     "#" + Math.floor(Math.random() * 16777215).toString(16);
-          return (
-            <Stack
-              key={el.name}
-              direction="row"
-              spacing={2}
-              alignItems="center"
-              sx={{ p: 1, border: "1px solid #ddd", borderRadius: 2 }}
-            >
-              <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
-                {el.name.charAt(0)}
-              </Avatar>
-              <Stack>
-                <Typography>{el.name}</Typography>
-                <Typography noWrap>{el.phoneNumber}</Typography>
+      {phoneList?.map((el) => {
+        //   const randomColor =
+        //     "#" + Math.floor(Math.random() * 16777215).toString(16);
+        return (
+          <Grid
+            container
+            key={el.name}
+            alignItems="center"
+            sx={{ p: 1, border: "1px solid #ddd", borderRadius: 2 }}
+          >
+            <Grid xs={8}>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
+                  {el.name.charAt(0)}
+                </Avatar>
+                <Stack>
+                  <Typography>{el.name}</Typography>
+                  <Typography noWrap>{el.phoneNumber}</Typography>
+                </Stack>
               </Stack>
-            </Stack>
-          );
-        })}
-      </Stack>
+            </Grid>
+            <Grid xs={4}>
+              <Stack direction="row" justifyContent="flex-end">
+                <Button color="error" variant="outlined" size="small">
+                  삭제
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
+        );
+      })}
     </>
   );
 };
