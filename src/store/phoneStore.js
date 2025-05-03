@@ -10,6 +10,10 @@ const usePhoneStore = create((set) => ({
       phoneList: [...state.phoneList, { name: name, phoneNumber: phoneNumber }],
     })),
   // 폰 번호 삭제
+  phonNumberDelete: (name) =>
+    set((state) => ({
+      phoneList: state.phoneList.filter((el) => el.name !== name),
+    })),
 }));
 
 export default usePhoneStore;
