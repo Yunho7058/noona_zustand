@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import usePhoneStore from "../store/phoneStore";
-import { Avatar, Stack, Typography } from "@mui/material";
+import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
+import { ModalComponent } from "./ModalComponent";
 
 export const ContacList = () => {
-  const { phoneList } = usePhoneStore();
+  const [modalOpen, setModalOpen] = useState(false);
+  const { phoneList, phonNumberDelete } = usePhoneStore();
+  const [modalName, setModalName] = useState("");
   const stringToColor = (str) => {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -16,40 +19,56 @@ export const ContacList = () => {
       ((hash >> 8) & 0xff).toString(16).padStart(2, "0");
     return color;
   };
+  const handelDeleteNumber = (name) => {
+    // phonNumberDelete(name);
+    setModalOpen(true);
+    setModalName(name);
+    console.log(name);
+  };
   return (
-    // <div>
-    //   연락처 리스트
-    //   {phoneList?.map((el, idx) => (
-    //     <div key={idx}>
-    //       <div>{el.name}</div>
-    //       <div>{el.phoneNumber}</div>
-    //     </div>
-    //   ))}
-    // </div>
     <>
-      <Stack spacing={2}>
+      <Grid container rowSpacing={2}>
         {phoneList?.map((el) => {
           //   const randomColor =
           //     "#" + Math.floor(Math.random() * 16777215).toString(16);
           return (
-            <Stack
+            <Grid
+              container
               key={el.name}
-              direction="row"
-              spacing={2}
               alignItems="center"
               sx={{ p: 1, border: "1px solid #ddd", borderRadius: 2 }}
+              size={12}
             >
-              <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
-                {el.name.charAt(0)}
-              </Avatar>
-              <Stack>
-                <Typography>{el.name}</Typography>
-                <Typography noWrap>{el.phoneNumber}</Typography>
-              </Stack>
-            </Stack>
+              <Grid size={9} sx={{ marginLeft: 2 }}>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
+                    {el.name.charAt(0)}
+                  </Avatar>
+                  <Stack>
+                    <Typography>{el.name}</Typography>
+                    <Typography noWrap>{el.phoneNumber}</Typography>
+                  </Stack>
+                </Stack>
+              </Grid>
+              <Grid size={2} justifyItems="center">
+                <Stack direction="row" justifyContent="flex-end">
+                  <Button
+                    color="error"
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handelDeleteNumber(el.name)}
+                  >
+                    삭제
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
           );
         })}
-      </Stack>
+      </Grid>
+      {modalOpen && (
+        <ModalComponent setModalOpen={setModalOpen} modalName={modalName} />
+      )}
     </>
   );
 };
