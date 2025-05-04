@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import usePhoneStore from "../store/phoneStore";
-import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { ModalComponent } from "./ModalComponent";
 
 export const ContacList = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const { phoneList } = usePhoneStore();
+  const [modalName, setModalName] = useState("");
   const stringToColor = (str) => {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -16,48 +26,55 @@ export const ContacList = () => {
       ((hash >> 8) & 0xff).toString(16).padStart(2, "0");
     return color;
   };
+  const handelDeleteNumber = (name) => {
+    setModalOpen(true);
+    setModalName(name);
+  };
   return (
-    // <div>
-    //   연락처 리스트
-    //   {phoneList?.map((el, idx) => (
-    //     <div key={idx}>
-    //       <div>{el.name}</div>
-    //       <div>{el.phoneNumber}</div>
-    //     </div>
-    //   ))}
-    // </div>
     <>
-      {phoneList?.map((el) => {
-        //   const randomColor =
-        //     "#" + Math.floor(Math.random() * 16777215).toString(16);
-        return (
-          <Grid
-            container
-            key={el.name}
-            alignItems="center"
-            sx={{ p: 1, border: "1px solid #ddd", borderRadius: 2 }}
-          >
-            <Grid xs={8}>
-              <Stack direction="row" spacing={2} alignItems="center">
-                <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
-                  {el.name.charAt(0)}
-                </Avatar>
-                <Stack>
-                  <Typography>{el.name}</Typography>
-                  <Typography noWrap>{el.phoneNumber}</Typography>
+      <Grid container rowSpacing={2}>
+        {phoneList?.map((el) => {
+          //   const randomColor =
+          //     "#" + Math.floor(Math.random() * 16777215).toString(16);
+          return (
+            <Grid
+              container
+              key={el.name}
+              alignItems="center"
+              sx={{ p: 1, border: "1px solid #ddd", borderRadius: 2 }}
+              size={12}
+            >
+              <Grid size={9} sx={{ marginLeft: 2 }}>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
+                    {el.name.charAt(0)}
+                  </Avatar>
+                  <Stack>
+                    <Checkbox></Checkbox>
+                    <Typography>{el.name}</Typography>
+                    <Typography noWrap>{el.phoneNumber}</Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
+              </Grid>
+              <Grid size={2} justifyItems="center">
+                <Stack direction="row" justifyContent="flex-end">
+                  <Button
+                    color="error"
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handelDeleteNumber(el.name)}
+                  >
+                    삭제
+                  </Button>
+                </Stack>
+              </Grid>
             </Grid>
-            <Grid xs={4}>
-              <Stack direction="row" justifyContent="flex-end">
-                <Button color="error" variant="outlined" size="small">
-                  삭제
-                </Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        );
-      })}
+          );
+        })}
+      </Grid>
+      {modalOpen && (
+        <ModalComponent setModalOpen={setModalOpen} modalName={modalName} />
+      )}
     </>
   );
 };
