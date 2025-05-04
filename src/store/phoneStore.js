@@ -3,7 +3,13 @@ import { create } from "zustand";
 // create(() => ({}))
 const usePhoneStore = create((set) => ({
   // 폰 정보 저장 이름과 폰번호 배열안에 객채로 저장 [{name:윤호,phoneNumber:01056432341}, ...]
-  phoneList: [],
+  phoneList: [
+    { name: "문윤호", phoneNumber: "01023237948" },
+    { name: "김관영", phoneNumber: "01023237948" },
+    { name: "기영학", phoneNumber: "01023237948" },
+    { name: "권기웅", phoneNumber: "01023237948" },
+    { name: "이규섭", phoneNumber: "01023237948" },
+  ],
   // 폰 번호 저장
   add: (name, phoneNumber) =>
     set((state) => ({

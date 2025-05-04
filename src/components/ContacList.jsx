@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import usePhoneStore from "../store/phoneStore";
-import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ModalComponent } from "./ModalComponent";
 
 export const ContacList = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { phoneList, phonNumberDelete } = usePhoneStore();
+  const { phoneList } = usePhoneStore();
   const [modalName, setModalName] = useState("");
   const stringToColor = (str) => {
     let hash = 0;
@@ -20,10 +27,8 @@ export const ContacList = () => {
     return color;
   };
   const handelDeleteNumber = (name) => {
-    // phonNumberDelete(name);
     setModalOpen(true);
     setModalName(name);
-    console.log(name);
   };
   return (
     <>
@@ -45,6 +50,7 @@ export const ContacList = () => {
                     {el.name.charAt(0)}
                   </Avatar>
                   <Stack>
+                    <Checkbox></Checkbox>
                     <Typography>{el.name}</Typography>
                     <Typography noWrap>{el.phoneNumber}</Typography>
                   </Stack>
