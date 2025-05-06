@@ -8,8 +8,10 @@ export const ModalComponent = ({ setModalOpen, modalName }) => {
   };
   const { phonNumberDelete } = usePhoneStore();
   const handlePhonNumberDelete = (name) => {
-    phonNumberDelete(modalName);
+    phonNumberDelete(name);
+    setModalOpen(false);
   };
+
   return (
     <Modal
       open={open}
@@ -41,7 +43,13 @@ export const ModalComponent = ({ setModalOpen, modalName }) => {
           >
             네
           </Button>
-          <Button onClose={handleClose}>아니요</Button>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            아니요
+          </Button>
         </div>
       </Box>
     </Modal>
