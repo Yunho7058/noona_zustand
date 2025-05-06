@@ -14,6 +14,7 @@ export const ContacList = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { phoneList } = usePhoneStore();
   const [modalName, setModalName] = useState("");
+  const [selectNumber, setSelectNumber] = useState([]);
   const stringToColor = (str) => {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -30,9 +31,23 @@ export const ContacList = () => {
     setModalOpen(true);
     setModalName(name);
   };
+  const handleSelect = (name) => {
+    //만약 이름 있으면 이름 삭제
+    //없으면 추가
+    let newSelectNumber;
+    if (selectNumber.indexOf(name) === -1) {
+      newSelectNumber = [...selectNumber, name];
+    } else {
+      newSelectNumber = selectNumber.filter((el) => el !== name);
+    }
+    setSelectNumber(newSelectNumber);
+    console.log(newSelectNumber);
+  };
   return (
     <>
       <Grid container rowSpacing={2}>
+        <Button>전체선택</Button>
+        <Button>선택목록 삭제</Button>
         {phoneList?.map((el) => {
           //   const randomColor =
           //     "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -46,11 +61,14 @@ export const ContacList = () => {
             >
               <Grid size={9} sx={{ marginLeft: 2 }}>
                 <Stack direction="row" spacing={2} alignItems="center">
+                  <Checkbox
+                    value={el.name}
+                    onChange={() => handleSelect(el.name)}
+                  />
                   <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>
                     {el.name.charAt(0)}
                   </Avatar>
                   <Stack>
-                    <Checkbox></Checkbox>
                     <Typography>{el.name}</Typography>
                     <Typography noWrap>{el.phoneNumber}</Typography>
                   </Stack>
