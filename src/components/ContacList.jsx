@@ -12,7 +12,7 @@ import { ModalComponent } from "./ModalComponent";
 
 export const ContacList = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { phoneList } = usePhoneStore();
+  const { phoneList, selectPhonNumberDelete } = usePhoneStore();
   const [modalName, setModalName] = useState("");
   const [selectNumber, setSelectNumber] = useState([]);
   const stringToColor = (str) => {
@@ -47,7 +47,9 @@ export const ContacList = () => {
     <>
       <Grid container rowSpacing={2}>
         <Button>전체선택</Button>
-        <Button>선택목록 삭제</Button>
+        <Button onClick={() => selectPhonNumberDelete(selectNumber)}>
+          선택목록 삭제
+        </Button>
         {phoneList?.map((el) => {
           //   const randomColor =
           //     "#" + Math.floor(Math.random() * 16777215).toString(16);
