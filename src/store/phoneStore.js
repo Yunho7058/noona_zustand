@@ -20,6 +20,20 @@ const usePhoneStore = create((set) => ({
     set((state) => ({
       phoneList: state.phoneList.filter((el) => el.name !== name),
     })),
+  selectPhonNumberDelete: (names) => {
+    // 선택한 배열은 [문윤호,기영학]
+    // 기존연락처는 [{이름,번호},{이룸,번호}]
+    const newSet = new Set(names);
+    set(
+      (state) => (
+        {
+          // 여기서 set has 로 구별해서 삭제
+          phoneList: state.phoneList.filter((el) => !newSet.has(el)),
+        },
+        console.log("여기", state.phoneList)
+      )
+    );
+  },
 }));
 
 export default usePhoneStore;
