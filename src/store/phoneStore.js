@@ -11,7 +11,7 @@ const usePhoneStore = create((set) => ({
     { name: "이규섭", phoneNumber: "01023237948" },
   ],
   // 폰 번호 저장
-  add: (name, phoneNumber) =>
+  addNumber: (name, phoneNumber) =>
     set((state) => ({
       phoneList: [...state.phoneList, { name: name, phoneNumber: phoneNumber }],
     })),
@@ -21,18 +21,13 @@ const usePhoneStore = create((set) => ({
       phoneList: state.phoneList.filter((el) => el.name !== name),
     })),
   selectPhonNumberDelete: (names) => {
-    // 선택한 배열은 [문윤호,기영학]
-    // 기존연락처는 [{이름,번호},{이룸,번호}]
+    // 선택한 배열은 names:[문윤호,기영학]
+    // 기존연락처는 phoneList:[{이름,번호},{이룸,번호}]
     const newSet = new Set(names);
-    set(
-      (state) => (
-        {
-          // 여기서 set has 로 구별해서 삭제
-          phoneList: state.phoneList.filter((el) => !newSet.has(el)),
-        },
-        console.log("여기", state.phoneList)
-      )
-    );
+    set((state) => ({
+      // 여기서 set has 로 구별해서 삭제
+      phoneList: state.phoneList.filter((el) => !newSet.has(el.name)),
+    }));
   },
 }));
 

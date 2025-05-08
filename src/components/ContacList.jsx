@@ -43,10 +43,20 @@ export const ContacList = () => {
     setSelectNumber(newSelectNumber);
     console.log(newSelectNumber);
   };
+  const handleSelectAll = () => {
+    if (selectNumber.length === phoneList.length) {
+      // 모두 선택되어 있으면 해제
+      setSelectNumber([]);
+    } else {
+      // 전체 선택
+      const allNames = phoneList.map((el) => el.name);
+      setSelectNumber(allNames);
+    }
+  };
   return (
     <>
       <Grid container rowSpacing={2}>
-        <Button>전체선택</Button>
+        <Button onClick={() => handleSelectAll()}>전체선택</Button>
         <Button onClick={() => selectPhonNumberDelete(selectNumber)}>
           선택목록 삭제
         </Button>
@@ -64,7 +74,7 @@ export const ContacList = () => {
               <Grid size={9} sx={{ marginLeft: 2 }}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   <Checkbox
-                    value={el.name}
+                    checked={selectNumber.includes(el.name)}
                     onChange={() => handleSelect(el.name)}
                   />
                   <Avatar sx={{ backgroundColor: stringToColor(el.name) }}>

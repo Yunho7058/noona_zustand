@@ -4,7 +4,7 @@ import usePhoneStore from "../store/phoneStore";
 import { useInput } from "../hooks/useInputHook";
 
 export const ContactForm = () => {
-  const { add } = usePhoneStore();
+  const { addNumber } = usePhoneStore();
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const handleAddContact = (name, number) => {
@@ -12,7 +12,7 @@ export const ContactForm = () => {
       alert("공백");
       return;
     } else {
-      add(name, number);
+      addNumber(name, number);
       setName("");
       setPhoneNumber("");
       alert("등록완료");
