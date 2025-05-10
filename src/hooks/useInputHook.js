@@ -26,44 +26,7 @@ function SignupForm() {
   );
 }
 ---
-적용
-import { useState } from "react";
 
-export const ContactForm = () => {
-  const { add } = usePhoneStore();
-
-  // ✅ useInput으로 상태 관리
-  const name = useInput("");
-  const phoneNumber = useInput("");
-
-  const handleAddContact = () => {
-    add(name.value, phoneNumber.value);
-
-    // 입력값 초기화 (옵션)
-    name.setValue("");
-    phoneNumber.setValue("");
-  };
-
-  return (
-    <Box display={"flex"} flexDirection="column" alignItems="center" gap={2}>
-      <TextField
-        id="name"
-        label="이름"
-        variant="outlined"
-        {...name} // ✅ 구조분해로 value + onChange 자동 적용
-      />
-      <TextField
-        id="outlined-basic"
-        label="전화번호"
-        variant="outlined"
-        {...phoneNumber}
-      />
-      <Button variant="contained" onClick={handleAddContact}>
-        추가
-      </Button>
-    </Box>
-  );
-};
 
 
 */
