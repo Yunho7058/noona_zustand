@@ -3,6 +3,7 @@ import { Grid, Stack } from "@mui/material";
 import "./App.css";
 import { ContactForm } from "./components/ContactForm";
 import { ContacList } from "./components/ContacList";
+import { SearchBox } from "./components/SearchBox";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <ContactForm />
+          <SearchBox />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <ContacList />

@@ -10,6 +10,7 @@ const usePhoneStore = create((set) => ({
     { name: "권기웅", phoneNumber: "01023237948" },
     { name: "이규섭", phoneNumber: "01023237948" },
   ],
+  showPhoneList: [],
   // 폰 번호 저장
   addNumber: (name, phoneNumber) =>
     set((state) => ({
