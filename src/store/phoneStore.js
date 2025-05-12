@@ -10,6 +10,7 @@ const usePhoneStore = create((set) => ({
     { name: "권기웅", phoneNumber: "01023237948" },
     { name: "이규섭", phoneNumber: "01023237948" },
   ],
+  // 번호 보이기 아무것도 없으면 폰리스트 보이고 검색창에 같은거 있으면 보이고
   showPhoneList: [],
   // 폰 번호 저장
   addNumber: (name, phoneNumber) =>
