@@ -32,12 +32,12 @@ function updateRate(success, isBad) {
   if (isBad) {
     // 패널티는 성공하면 확률 내려감, 실패하면 확률 올라감
     successRate = success
-      ? Math.max(25, successRate - 10)
+      ? Math.max(25, successRate - 1)
       : Math.min(75, successRate + 10);
   } else {
     // 유효각인은 성공하면 확률 내려감, 실패하면 확률 올라감
     successRate = success
-      ? Math.max(25, successRate - 10)
+      ? Math.max(25, successRate - 1)
       : Math.min(75, successRate + 10);
   }
 }
@@ -63,11 +63,27 @@ function ask() {
   }
 
   rl.question(
-    "깎을 줄 선택 (1: 원한, 2: 아드렐날린, 3: 공격력 감소): ",
+    "깎을 줄 선택 (1: 원한, 2: 아드렐날린, 3: 공격력 감소, 4: 리셋, 5: 종료): ",
     (input) => {
       const choice = parseInt(input);
       let target;
 
+      if (choice === 4) {
+        successRate = 75;
+        for (const key in state) {
+          state[key].success = 0;
+          state[key].fail = 0;
+        }
+        console.log("🔄 상태가 초기화되었습니다!");
+        printStatus();
+        ask();
+        return;
+      }
+      if (choice === 5) {
+        console.log("👋 게임을 종료합니다. 감사합니다!");
+        rl.close();
+        return;
+      }
       if (choice === 1) target = state.good1;
       else if (choice === 2) target = state.good2;
       else if (choice === 3) target = state.bad;

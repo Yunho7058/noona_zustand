@@ -5,11 +5,13 @@ import { ContactForm } from "./components/ContactForm";
 import { ContacList } from "./components/ContacList";
 import { SearchBox } from "./components/SearchBox";
 import { PhonNumberList } from "./page/PhonNumberList";
+import CountTest from "./page/CountTest";
 
 function App() {
   return (
     <div>
       <PhonNumberList />
+      <CountTest />
     </div>
   );
 }
