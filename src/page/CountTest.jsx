@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import useCountStore from "./store/countStore";
+import useCountStore from "../store/countStore";
 
-export const CountTest = () => {
+const CountTest = () => {
   const { count, up, down } = useCountStore();
   const [text, setText] = useState(null);
   return (
@@ -23,3 +23,5 @@ export const CountTest = () => {
     </div>
   );
 };
+
+export default CountTest;

@@ -8,8 +8,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useInput } from "../hooks/useInputHook";
 
 export const SearchBox = () => {
+  const { value, setValue, onChange } = useInput();
   // 검색한 이름 넘겨서 같은 배열 찾기 한글자 칠때마다 보이게 하기
   // 지금은 전체 리스트를 보여주지만 쇼리스트를 새로 만들고
   // 실시간으로 보이게 하기
@@ -29,6 +31,10 @@ export const SearchBox = () => {
               <AccountCircle />
             </InputAdornment>
           }
+          value={value}
+          onChange={(e) => {
+            onChange(e), console.log(value);
+          }}
         />
       </FormControl>
     </Box>
