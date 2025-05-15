@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import usePhoneStore from "../store/phoneStore";
 import {
   Avatar,
@@ -12,9 +12,18 @@ import { ModalComponent } from "./ModalComponent";
 
 export const ContacList = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { phoneList, selectPhonNumberDelete } = usePhoneStore();
+  const { phoneNumberList, selectPhonNumberDelete, filteredList } =
+    usePhoneStore();
   const [modalName, setModalName] = useState("");
   const [selectNumber, setSelectNumber] = useState([]);
+  const [phoneList, setPhoneList] = useState([]);
+  useEffect(() => {
+    if (filteredList.length >= 1) {
+      setPhoneList(filteredList);
+    } else {
+      setPhoneList(phoneNumberList);
+    }
+  }, [phoneNumberList, filteredList]);
   const stringToColor = (str) => {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

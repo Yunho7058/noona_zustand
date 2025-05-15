@@ -8,7 +8,7 @@ export const PhonNumberList = () => {
   return (
     <div>
       <h1>연락처 앱</h1>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} height="500px">
         <Grid
           container
           spacing={2}

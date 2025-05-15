@@ -9,15 +9,19 @@ import {
 import React from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useInput } from "../hooks/useInputHook";
+import usePhoneStore from "../store/phoneStore";
 
 export const SearchBox = () => {
   const { value, setValue, onChange } = useInput();
+  const { findNameList } = usePhoneStore();
   // 검색한 이름 넘겨서 같은 배열 찾기 한글자 칠때마다 보이게 하기
   // 지금은 전체 리스트를 보여주지만 쇼리스트를 새로 만들고
   // 실시간으로 보이게 하기
   // 전역 상태로 인풋창 관리해서 바로바로 보내주고
   // 그 인풋창 안에 있으면 관련된 이름만 보여주기
   //
+
+  // 여기서 value 를 store 보내주고
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <FormControl variant="standard">
@@ -33,7 +37,7 @@ export const SearchBox = () => {
           }
           value={value}
           onChange={(e) => {
-            onChange(e), console.log(value);
+            findNameList(e.target.value), onChange(e);
           }}
         />
       </FormControl>
