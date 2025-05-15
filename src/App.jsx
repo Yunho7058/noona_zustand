@@ -3,19 +3,15 @@ import { Grid, Stack } from "@mui/material";
 import "./App.css";
 import { ContactForm } from "./components/ContactForm";
 import { ContacList } from "./components/ContacList";
+import { SearchBox } from "./components/SearchBox";
+import { PhonNumberList } from "./page/PhonNumberList";
+import CountTest from "./page/CountTest";
 
 function App() {
   return (
     <div>
-      <h1>연락처 앱</h1>
-      <Grid container spacing={2}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <ContactForm />
-        </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <ContacList />
-        </Grid>
-      </Grid>
+      <PhonNumberList />
+      <CountTest />
     </div>
   );
 }
