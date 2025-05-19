@@ -18,9 +18,12 @@ export const ContacList = () => {
   const [selectNumber, setSelectNumber] = useState([]);
   const [phoneList, setPhoneList] = useState([]);
   useEffect(() => {
+    console.log(filteredList, phoneNumberList);
     if (filteredList.length >= 1) {
+      console.log("1");
       setPhoneList(filteredList);
     } else {
+      console.log("2");
       setPhoneList(phoneNumberList);
     }
   }, [phoneNumberList, filteredList]);
