@@ -9,6 +9,11 @@ const usePhoneStore = create((set) => ({
     { name: "기영학", phoneNumber: "01023237948" },
     { name: "권기웅", phoneNumber: "01023237948" },
     { name: "이규섭", phoneNumber: "01023237948" },
+    { name: "김윤호", phoneNumber: "01023237948" },
+    { name: "김구다", phoneNumber: "01023237948" },
+    { name: "최영기", phoneNumber: "01023237948" },
+    { name: "안창현", phoneNumber: "01023237948" },
+    { name: "고영실", phoneNumber: "01023237948" },
   ],
   // 번호 보이기 아무것도 없으면 폰리스트 보이고 검색창에 같은거 있으면 보이고
   filteredList: [],
@@ -51,14 +56,13 @@ const usePhoneStore = create((set) => ({
       if (input.length === 0) return { filteredList: [] };
       const isChosungOnly = /^[ㄱ-ㅎ]+$/.test(input); // 초성만 있는지 검사
       // const inputInitial = state.getInitials(input); // 입력 초성
-      // console.log(inputInitial, isChosungOnly);
-      // 내가 하고싶은건 두번째 초성아닐때도 검색 예를들어 문ㅇ 할때 문ㅇ 검색하기
+
       const filtered = state.phoneNumberList.filter((person) => {
         // 이게 초성 있는지 확인해주는 문구
         // 연락처에 있는 이름 초성으로 다 뽑음
         // 필터 함수이기떄문에 하나하나 검색 문윤호 부터
         const nameInitial = state.getInitials(person.name);
-        // 만약 문ㅇ 들어오면
+
         // 여기서 두가지 경우 둘다 검색하기
         if (isChosungOnly) {
           // 초성 검색 모드
